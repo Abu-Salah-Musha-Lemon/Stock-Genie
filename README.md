@@ -59,7 +59,7 @@ To get started with Stock Genie, follow these steps:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/yourusername/stock-genie.git
+   git clone https://github.com/Abu-Salah-Musha-Lemon/Stock-Genie.git
    cd stock-genie
    ```
 

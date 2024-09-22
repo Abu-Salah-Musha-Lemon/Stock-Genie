@@ -26,20 +26,18 @@
 
 
 	<script src="{{asset('js/modernizr.min.js')}}"></script>
-<style>
-   
-       body {
-  background: #f5f5f5;
-  margin: 0;
-  -webkit-text-size-adjust: 100%;
-  font-family: 'Nunito', sans-serif;
-  background-image: url('{{ asset('images/logo/background5.75.png') }}') !important;
-  background-size: auto;
-  background-repeat: repeat;
-  background-position: center center;
-}
-	
-</style>
+	<style>
+		body {
+			background: #f5f5f5;
+			margin: 0;
+			-webkit-text-size-adjust: 100%;
+			font-family: 'Nunito', sans-serif;
+			background-image: url('{{ asset(' images/logo/bg_e.png') }}') !important;
+			background-size: auto;
+			background-repeat: repeat;
+			background-position: center center;
+		}
+	</style>
 </head>
 
 

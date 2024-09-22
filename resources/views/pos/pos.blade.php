@@ -209,8 +209,10 @@
 											<td colspan="2">: {{Cart::count();}}</td>
 										</tr>
 										<tr>
-											<td colspan="3">Vat::</td>
-											<td colspan="2">:{{Cart::tax();}} ৳</td>
+											@if(Cart::tax()>0)
+												<td colspan="3">Vat::</td>
+												<td colspan="2">:{{Cart::tax();}} ৳</td>
+											@endif
 										</tr>
 										<tr>
 											<td colspan="3">Total::</td>

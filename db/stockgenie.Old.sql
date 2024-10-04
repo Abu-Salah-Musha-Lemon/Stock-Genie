@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2024 at 07:54 PM
+-- Generation Time: Sep 06, 2024 at 08:23 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -76,12 +76,20 @@ CREATE TABLE `category` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `category`
+-- Table structure for table `customers`
 --
 
-INSERT INTO `category` (`id`, `category_name`, `created_at`, `updated_at`) VALUES
-(1, 'Food', NULL, NULL);
+CREATE TABLE `customers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -91,27 +99,19 @@ INSERT INTO `category` (`id`, `category_name`, `created_at`, `updated_at`) VALUE
 
 CREATE TABLE `employees` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `employee_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `email` varchar(255) NOT NULL DEFAULT '',
-  `phone` varchar(255) NOT NULL DEFAULT '',
-  `address` varchar(255) NOT NULL DEFAULT '',
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
   `experience` int(11) DEFAULT NULL,
-  `photo` varchar(255) NOT NULL DEFAULT '',
-  `salary` varchar(255) NOT NULL DEFAULT '0',
-  `vacation` varchar(255) NOT NULL DEFAULT '0',
-  `city` varchar(255) NOT NULL DEFAULT '',
+  `photo` varchar(255) NOT NULL,
+  `salary` varchar(255) NOT NULL,
+  `vacation` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
   `nid` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `employees`
---
-
-INSERT INTO `employees` (`id`, `employee_id`, `name`, `email`, `phone`, `address`, `experience`, `photo`, `salary`, `vacation`, `city`, `nid`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Leon', 'leon@gmail.com', '01234567892', 'XYZ, JatraBark, Dhaka 1204', NULL, 'image/employee/1728063424.jpeg', '0', '0', 'Dhaka', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -200,17 +200,17 @@ CREATE TABLE `migrations` (
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2024_06_10_101938_create_categories_table', 2),
 (155, '2024_06_10_101526_create_customers_table', 4),
-(233, '0001_01_01_000000_create_users_table', 5),
-(234, '0001_01_01_000001_create_cache_table', 5),
-(235, '0001_01_01_000002_create_jobs_table', 5),
-(236, '2024_06_10_091426_create_employees_table', 5),
-(237, '2024_06_10_101330_create_products_table', 5),
-(238, '2024_06_10_101736_create_suppliers_table', 5),
-(239, '2024_06_10_102130_create_orders_table', 5),
-(240, '2024_06_10_102250_create_order_details_table', 5),
-(241, '2024_06_10_102422_create_expenses_table', 5),
-(242, '2024_06_10_102600_create_attendances_table', 5),
-(243, '2024_06_10_180915_create_category_table', 5);
+(167, '0001_01_01_000000_create_users_table', 5),
+(168, '0001_01_01_000001_create_cache_table', 5),
+(169, '0001_01_01_000002_create_jobs_table', 5),
+(170, '2024_06_10_091426_create_employees_table', 5),
+(171, '2024_06_10_101330_create_products_table', 5),
+(172, '2024_06_10_101736_create_suppliers_table', 5),
+(173, '2024_06_10_102130_create_orders_table', 5),
+(174, '2024_06_10_102250_create_order_details_table', 5),
+(175, '2024_06_10_102422_create_expenses_table', 5),
+(176, '2024_06_10_102600_create_attendances_table', 5),
+(177, '2024_06_10_180915_create_category_table', 5);
 
 -- --------------------------------------------------------
 
@@ -310,7 +310,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('AuIsaHq7pljyES87LkBIYJ77x5L293kvWGT6QUek', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTVVraEN5M2tNZEZaamZZaE4xMUJDdzZaVHFiZDFrQ1Z1R3pDNkRFcyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1728064440);
+('BiGTDponeMwzomy4B8kmfrJhxlZ7zslYsRhPHdrK', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoicnlhZW45S3l2TzVRU3dqMEVlT1Z6OWJpUnpUWGFmNzI0bUZ1SXhWeSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozMzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2FsbC1wcm9kdWN0Ijt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1725603767);
 
 -- --------------------------------------------------------
 
@@ -341,7 +341,6 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  `role` int(11) NOT NULL DEFAULT 1,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -351,8 +350,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Musha', 'leon@gmail.com', NULL, '$2y$12$4GsKUHpI0wF/PepLWmFIp.I4ShOWv7dxy1vFywJWN9yOpuwy.SqKW', 0, NULL, '2024-10-04 17:23:11', '2024-10-04 17:38:41');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Musha', 'abusalahmusha512@gmail.com', NULL, '$2y$12$2k2RUbEgUbP853AZ324IF.JgqTI.v9JME/Q8GvgTvY0x8IMwwY6vG', NULL, '2024-09-06 00:22:47', '2024-09-06 00:22:47');
 
 --
 -- Indexes for dumped tables
@@ -383,11 +382,16 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `employees`
 --
 ALTER TABLE `employees`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `employees_employee_id_unique` (`employee_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `expenses`
@@ -480,13 +484,19 @@ ALTER TABLE `attendances`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `expenses`
@@ -510,7 +520,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 
 --
 -- AUTO_INCREMENT for table `orders`

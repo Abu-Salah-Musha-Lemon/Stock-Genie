@@ -240,10 +240,12 @@
 					<h3 class="portlet-title text-dark text-uppercase"> Products </h3>
 
 					@include('product.add_product_modal')
+					@if(Auth::user()->role==0)
 					<a class="btn btn-primary btn-custom waves-effect waves-light " data-toggle="modal"
 						data-target="#addProductsModal">
 						Add Product
 					</a>
+					@endif
 				</div>
 				<div class="card-body">
 

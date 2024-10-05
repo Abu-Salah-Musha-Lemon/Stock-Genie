@@ -29,7 +29,6 @@ class singleEmployeeController extends Controller
         $data = [
             'phone' => $request->phone,
             'address' => $request->address,
-            'salary' => $request->salary,
             'city' => $request->city,
         ];
     

@@ -154,6 +154,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware('roleManager:employee')->group(function () {
         // Employee specific routes
         Route::get('/dashboard/employee', [DashboardController::class, 'index'])->name('employee.dashboard'); // Employee dashboard
+        Route::get('/', [DashboardController::class, 'index'])->name('employee.dashboard'); // Employee dashboard
     });
 
     // Other routes below...

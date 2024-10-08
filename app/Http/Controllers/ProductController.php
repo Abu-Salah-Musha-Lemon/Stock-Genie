@@ -337,27 +337,6 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      */
 
-    // public function destroy(string $id)
-    // {
-    //     $delete = DB::table('products')
-    //     ->where('id',$id)
-    //     ->first();
-
-    //     $photo=$delete->product_image;
-    //     if ($photo) {
-            
-    //         unlink($photo);
-    //     }
-    //     // var_dump( $singleUser);
-    //     $deleteUser=DB::table('products')
-    //                 ->where('id',$id)
-    //                 ->delete();
-    //                 $notification = array(
-    //                     'message' =>'Product delete successfully',
-    //                         'alert-type' => 'success'
-    //                     );
-    //                 return redirect()->back()->with($notification);
-    // }
     public function destroy(string $id)
 {
     // Fetch the product record from the database

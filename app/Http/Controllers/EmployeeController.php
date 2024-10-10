@@ -17,7 +17,10 @@ class EmployeeController extends Controller
         return view('employee.add_employee');
     }
     public function allEmployee() {
-        $employees = DB::table('employees')->get();
+        $employees = DB::table('employees')
+                    ->join('users','users.id','employees.employee_id')
+                    ->select('employees.*','users.role')
+                    ->get();
         // $employees=DB::table('employees');
         return view('employee.all_employee',compact('employees'));
     }
@@ -39,7 +42,6 @@ class EmployeeController extends Controller
         
         // $encryptedNID = Crypt::encryptString($nid);
 
-
         $data =array();
         $data['name']=$request->name;
         $data['email']=$request->email;
@@ -54,11 +56,7 @@ class EmployeeController extends Controller
         // $data['nid'] = Crypt::encryptString($request->nid);
         $data['nid'] = $request->nid;
 
-
         $image = $request->file('photo');
-        // var_export($data);
-
-        // exit;
         
         if ($image) {
             $image_name = time().'.'.$image->getClientOriginalExtension();
@@ -101,36 +99,6 @@ class EmployeeController extends Controller
            return view('employee.view_employee',compact('single'));
     }
 
-
-    // delete single employee
-    public function deleteEmployee($id) {
-        $delete = DB::table('employees')
-                        ->where('id',$id)
-                        ->first();
-                        $photo=$delete->photo;
-                        // var_dump( $singleUser);
-        if ($photo && file_exists($photo)) {
-            unlink($photo);
-        }
-        
-        $deleteUser=DB::table('employees')
-                    ->where('id',$id)
-                    ->delete();
-        if ($deleteUser) {
-            $notification = array(
-                'message' => 'Employee Delete Successfully',
-                'alert-type' => 'success'
-            );
-            return redirect()->route('employee.all-employee')->with($notification);
-        } else {
-            $notification = array(
-                'message' => 'Failed to Update',
-                'alert-type' => 'error'
-            );
-            return redirect()->back()->with($notification);
-        }
-                    
-    }
     // edit single employee
     public function editEmployee($id) {
         $editUser = DB::table('employees')
@@ -216,4 +184,47 @@ class EmployeeController extends Controller
 							return redirect()->back();
 					}
 			}
-	}}
+	}
+
+    public function deleteEmployee($id) {
+        // Fetch the employee record
+        $employee = DB::table('employees')->where('id', $id)->first();
+    
+        if ($employee) {
+            // Delete the photo if it exists
+            $photo = $employee->photo;
+            if ($photo && file_exists(public_path($photo))) {
+                unlink(public_path($photo));
+            }
+    
+            // Delete the employee record
+            $deleteUser = DB::table('employees')->where('id', $id)->delete();
+    
+            // Optionally delete associated user record if needed
+            // Assuming user_id is stored in employees table
+            if ($deleteUser) {
+                // Only delete the user if the employee was successfully deleted
+                DB::table('users')->where('id', $employee->employee_id)->delete();
+    
+                $notification = [
+                    'message' => 'Employee deleted successfully',
+                    'alert-type' => 'success'
+                ];
+                return redirect()->route('employee.all-employee')->with($notification);
+            } else {
+                $notification = [
+                    'message' => 'Failed to delete employee',
+                    'alert-type' => 'error'
+                ];
+                return redirect()->back()->with($notification);
+            }
+        } else {
+            $notification = [
+                'message' => 'Employee not found',
+                'alert-type' => 'error'
+            ];
+            return redirect()->back()->with($notification);
+        }
+    }
+    
+}

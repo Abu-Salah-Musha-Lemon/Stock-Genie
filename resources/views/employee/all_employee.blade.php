@@ -44,15 +44,21 @@
 										</td>
 										<td>{{$row->salary}}</td>
 										<td class="ignore-row" style="display: flex;gap: 4px;">
+
 											<a href="{{URL::to('/edit-employee'.$row->id)}}"
 												class="btn btn-sm btn-info btn-custom waves-effect waves-light m-b-5 p-b-0"><i
-													class="bi bi-pencil-square" style="font-size: 18px;"></i></a>
+													class="bi bi-pencil-square" style="font-size: 18px;"></i>
+											</a>
 											<a href="{{URL::to('/view-employee'.$row->id)}}"
 												class="btn btn-sm btn-primary btn-custom waves-effect waves-light m-b-5 p-b-0"><i
-													class="bi bi-cast" style="font-size: 18px;"></i></a>
-											<a href="{{URL::to('/delete-employee'.$row->id)}}"
-												class="btn btn-sm btn-danger btn-custom waves-effect waves-light m-b-5 p-b-0"><i
-													class="bi bi-trash3" style="font-size: 18px;"></i></a>
+													class="bi bi-cast" style="font-size: 18px;"></i>
+											</a>
+
+											@if($row->role == 1) <!-- Show delete button if role is 1 -->
+											<a href="{{URL::to('/delete-employee'.$row->id)}}" class="btn btn-sm btn-danger btn-custom waves-effect waves-light m-b-5 p-b-0" onclick="confirmation(event)">
+													<i class="bi bi-trash3" style="font-size: 18px;"></i>
+											</a>
+											@endif
 
 										</td>
 									</tr>
@@ -70,6 +76,24 @@
 </div>
 @section('script')
 <script>
+	 function confirmation(ev) {
+    ev.preventDefault();  // Prevent the default link behavior
+    var urlToRedirect = ev.currentTarget.getAttribute('href');  
+    console.log(urlToRedirect); 
+
+    swal({
+        title: "Are you sure to delete this Employee?",
+        text: "You will not be able to revert this!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            // Redirect if confirmed
+            window.location.href = urlToRedirect;
+        }
+    });
+}
     $(document).ready(function () {
         initializeDataTable(['Name', 'Phone', 'Salary', 'Salary']);
     });

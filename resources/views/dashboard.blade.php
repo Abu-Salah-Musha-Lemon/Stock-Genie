@@ -259,6 +259,104 @@ $year = date("Y");
 		</div>
 	</div>
 </div>
+
+<div class="row">
+	<div class="col-lg-6">
+		<div class="panel panel-border panel-danger widget-s-1">
+			<div class="panel-heading">
+				<h3 class="panel-title">Low Stock alert</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					@php
+					// Filter products with quantity less than 10 and paginate
+					$product = DB::table('products')
+					->where('product_qty', '<', 10) ->paginate(5);
+						@endphp
+						<div class="col-12">
+							<div class="table-responsive">
+								<table id="dataTable" class="table table-striped table-bordered">
+									<thead>
+										<tr>
+											<th>SL</th>
+											<th>Product Name</th>
+											<th>Product Code</th>
+											<th>Quantity</th>
+										</tr>
+									</thead>
+									<tbody>
+										@php $s = ($product->currentPage() - 1) * $product->perPage(); @endphp
+										@foreach($product as $row)
+										<tr>
+											<td>{{ ++$s }}</td>
+											<td>{{ $row->product_name }}</td>
+											<td>{{ $row->product_code }}</td>
+											<td><span class='badge badge-danger'>{{ $row->product_qty }}</span></td>
+										</tr>
+										@endforeach
+									</tbody>
+								</table>
+							</div>
+							<!-- Pagination Links -->
+							{{ $product->links('pagination::bootstrap-4') }}
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="col-lg-6">
+		<div class="panel panel-border panel-success widget-s-1">
+			<div class="panel-heading">
+				<h3 class="panel-title">New Product Alert</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					@php
+					$date = date("Y-m-d");
+					$product = DB::table('products')->paginate(10);;
+					@endphp
+					<div class="col-12">
+						<div class="table-responsive">
+							<table id="dataTable" class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>SL</th>
+										<th>Product Name</th>
+										<th>Product Code</th>
+										<th>Quantity</th>
+										<th>Price</th>
+									</tr>
+								</thead>
+								<tbody>
+								@php $s = ($product->currentPage() - 1) * $product->perPage(); @endphp
+									@foreach($product as $row)
+									@if(explode(' ',$row->updated_at)[0] ==$date)
+									<tr>
+										<td>{{$s++}}</td>
+										<td>{{$row->product_name}}</td>
+										<td>{{$row->product_code}}</td>
+										<td><span class='badge badge-success'>{{$row->product_qty}}</span></td>
+										<td>{{$row->selling_price}} ৳</td>
+									</tr>
+									@endif
+									@endforeach
+								</tbody>
+
+							
+							</table>
+						</div>
+							<!-- Pagination Links -->
+							{{ $product->links('pagination::bootstrap-4') }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 @section('script')
 <script>
 	$(document).ready(function () {

@@ -26,10 +26,32 @@
     <link rel="stylesheet" href="{{ asset('dataTable/buttons.dataTables.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('dataTable/searchBuilder.dataTables.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('dataTable/dataTables.dateTime.min.css') }}" />
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <link href="{{ asset('assets/datatables/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css" />
+    <style>
+        div.dataTables_wrapper div.dataTables_filter input {
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            border-radius: 4px !important;
+            padding:4px
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+        display: inline-block;
+        margin-left: .167em;
+        margin-right: .167em;
+        padding: .5em 1em;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        border-radius: 2px;
+        cursor: pointer;
+        font-size: .88em;
+        line-height: 1.6em;
+        color: inherit;
+        overflow: hidden;
+        background: linear-gradient(to bottom, rgba(230, 230, 230, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+        border: 1px solid rgba(0, 0, 0, 0.6);
+        background: linear-gradient(to bottom, rgba(230, 230, 230, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%);
+        }
+    </style>
     <!-- Font Icons -->
     <link href="{{ asset('assets/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/ionicon/css/ionicons.min.css') }}" rel="stylesheet" />
@@ -49,21 +71,9 @@
     <!-- Local Server -->
     <link rel="stylesheet" href="{{ asset('dataTable/bootstrap-icons.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('dataTable/toastr.min.css') }}" />
-    <link href="{{ asset('assets/datatables/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css" />
 
     <script src="{{ asset('js/modernizr.min.js') }}"></script>
-    <style>
-        .dataTables_wrapper .dataTables_paginate .paginate_button {
-            box-sizing: border-box;
-            display: inline-block;
-            min-width: 1.5em;
-            padding: 0 !important;
-            cursor: pointer;
-            color: inherit !important;
-            border: 1px solid transparent;
-            background-color: none;
-        }
-    </style>
+   
 </head>
 
 <body class="fixed-left">
@@ -192,18 +202,20 @@
     <script src="{{ asset('assets/sweet-alert/sweet-alert.2.1.2.js') }}"></script>
 
     <!-- DataTables -->
-    <script src="{{ asset('dataTable/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('dataTable/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('dataTable/dataTables.searchBuilder.min.js') }}"></script>
-    <script src="{{ asset('dataTable/dataTables.dateTime.min.js') }}"></script>
-    <script src="{{ asset('dataTable/jszip.min.js') }}"></script>
-    <script src="{{ asset('dataTable/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('dataTable/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('dataTable/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('dataTable/vfs_fonts.1.68.js') }}"></script>
+    <script src="{{ asset('dataTable/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('dataTable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('dataTable/js/jszip.min.js') }}"></script>
+    <script src="{{ asset('dataTable/js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('dataTable/js/vfs_fonts.1.68.js') }}"></script>
+    <script src="{{ asset('dataTable/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('dataTable/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('dataTable/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('dataTable/js/dataTables.searchBuilder.min.js') }}"></script>
+    <script src="{{ asset('dataTable/js/dataTables.dateTime.min.js') }}"></script>
+
 
     <!-- Toastr for notifications -->
-    <script src="{{ asset('dataTable/toastr.min.js') }}"></script>
+    <script src="{{ asset('dataTable/js/toastr.min.js') }}"></script>
 
     <!-- CUSTOM JS -->
     <script src="{{ asset('js/jquery.app.js') }}"></script>
@@ -227,7 +239,10 @@
                 table = $("#dataTable").DataTable();
             } else {
                 table = $("#dataTable").DataTable({
-                    paging: false,
+                    // lengthMenu: [5, 10, 25, 50],
+                    pageLength: 8,
+                    paging: true, 
+                    searching: true, // Enable the search box
                     responsive: true,
                     dom: "Bfrtip",
                     buttons: [

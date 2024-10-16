@@ -134,18 +134,18 @@ INSERT INTO `products` (`product_name`, `product_code`, `category_id`, `quantity
 ('Salt', 'SALT123', 2, 200, 30.00, NULL, NULL),
 ('Oil', 'OIL123', 3, 150, 75.00, NULL, NULL);
 
--- Create `roles` Table
-CREATE TABLE `roles` (
-  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `role` VARCHAR(255) NOT NULL,
+-- -- Create `roles` Table
+-- CREATE TABLE `roles` (
+--   `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+--   `role` VARCHAR(255) NOT NULL,
  
   
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+--   PRIMARY KEY (`id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `roles` (`role`, `created_at`, `updated_at`) VALUES
-('Admin', NULL, NULL),
-('User', NULL, NULL);
+-- INSERT INTO `roles` (`role`, `created_at`, `updated_at`) VALUES
+-- ('Admin', NULL, NULL),
+-- ('User', NULL, NULL);
 
 -- Create `user_role` Table
 CREATE TABLE `user_role` (

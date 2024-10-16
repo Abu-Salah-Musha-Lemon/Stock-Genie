@@ -12,7 +12,7 @@ $day = date("d-m-y");
 $month = date("M");
 $year = date("Y");
 @endphp
-
+@if(auth()->user()->role === 0)
 <div class="row">
 
 	<div class="col-md-6 col-sm-6 col-lg-3">
@@ -163,6 +163,7 @@ $year = date("Y");
 
 </div>
 
+<!-- Today Total Financial Statement  -->
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-border panel-purple widget-s-1">
@@ -259,7 +260,8 @@ $year = date("Y");
 		</div>
 	</div>
 </div>
-
+@endif
+ <!-- Stock details  -->
 <div class="row">
 	<div class="col-lg-6">
 		<div class="panel panel-border panel-danger widget-s-1">
@@ -275,7 +277,7 @@ $year = date("Y");
 						@endphp
 						<div class="col-12">
 							<div class="table-responsive">
-								<table id="dataTable" class="table table-striped table-bordered">
+								<table  class="table table-striped table-bordered">
 									<thead>
 										<tr>
 											<th>SL</th>
@@ -319,7 +321,7 @@ $year = date("Y");
 					@endphp
 					<div class="col-12">
 						<div class="table-responsive">
-							<table id="dataTable" class="table table-striped table-bordered">
+							<table  class="table table-striped table-bordered">
 								<thead>
 									<tr>
 										<th>SL</th>

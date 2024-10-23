@@ -87,12 +87,12 @@ To get started with Stock Genie, follow these steps:
 5. **Additional Configuration:**
    Configuration `php.ini`
 
-    -Ensure the following extension is enabled in your `php.ini` file:
+    - Ensure the following extension is enabled in your `php.ini` file:
 
     ```ini
     extension=zip
     ```
-   -Ensure the following extension is enabled in your `php.ini` file:
+   - Ensure the following extension is enabled in your `php.ini` file:
 
     ```ini
     extension=gd

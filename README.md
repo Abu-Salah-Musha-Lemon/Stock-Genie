@@ -84,8 +84,19 @@ To get started with Stock Genie, follow these steps:
      php artisan config:cache
      ```
 
-5. **Configure PHP:**
-   - Ensure the `zip` extension is enabled in `php.ini`.
+5. **Additional Configuration:**
+   Configuration `php.ini`
+
+    -Ensure the following extension is enabled in your `php.ini` file:
+
+    ```ini
+    extension=zip
+    ```
+   -Ensure the following extension is enabled in your `php.ini` file:
+
+    ```ini
+    extension=gd
+    ```
 
 6. **Run Migrations:**
    ```bash
